@@ -46,4 +46,14 @@ class Screening
     values = [@id]
     return SqlRunner.run(sql, values)[0]['price'].to_i
   end
+
+  # def Screening.best_seller
+  #   sql = "SELECT screenings.id, screenings.seats_sold FROM screenings"
+  #   results_array = SqlRunner.run(sql)
+  #     #need a .each line that concatenates the hash keys to return strings that say
+  #     #"Screening1 has sold X seats"
+  #     #Screening2 has sold X seats" etc
+  #   
+  #end
+
 end

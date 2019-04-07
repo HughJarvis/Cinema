@@ -16,7 +16,7 @@ class Customer
   def save()
     sql = "INSERT INTO customers (name, funds)
         VALUES ($1, $2) RETURNING id"
-    values = [@name, @price]
+    values = [@name, @funds]
     @id = SqlRunner.run(sql, values)[0]['id'].to_i
   end
 
@@ -29,6 +29,13 @@ class Customer
   def Customer.delete_all()
     sql = "DELETE FROM customers"
     SqlRunner.run(sql)
+  end
+
+  def update()
+    sql = "UPDATE customers SET (name, funds)
+          = ($1, $2) WHERE id = $3"
+    values = [@name, @funds, @id]
+    SqlRunner.run(sql, values)
   end
 
   def films()
@@ -52,6 +59,8 @@ class Customer
 
   def buy_ticket(film)
     @funds -= film.price
-    #return Ticket.new({'customer_id' => @id, 'film_id' => film.id})
+    issued_ticket = Ticket.new({'customer_id' => @id, 'film_id' => film.id})
+    issued_ticket.save
+    return issued_ticket
   end
 end

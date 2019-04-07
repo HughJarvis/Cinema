@@ -1,6 +1,7 @@
 require_relative("../db/sql_runner")
 require_relative("film.rb")
 require_relative("ticket.rb")
+require_relative("screening.rb")
 
 class Customer
 
@@ -56,11 +57,17 @@ class Customer
     return results.map{ |ticket| Ticket.new(ticket) }
   end
 
-
-  def buy_ticket(film)
-    @funds -= film.price
-    issued_ticket = Ticket.new({'customer_id' => @id, 'film_id' => film.id})
+  def buy_ticket(screening)
+    @funds -= screening.find_price
+    screening.seats_available -= 1
+    screening.seats_sold += 1
+    issued_ticket = Ticket.new({
+                    'customer_id' => @id,
+                    'film_id' => screening.film_id,
+                    'screening_id' => screening.id
+                    })
     issued_ticket.save
+    screening.update
     return issued_ticket
   end
 end

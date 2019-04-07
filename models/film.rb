@@ -47,4 +47,10 @@ class Film
     return results.map{ |customer| Customer.new(customer) }
   end
 
+  def screenings()
+    sql = "SELECT * FROM screenings WHERE screenings.film_id = $1"
+    values = [@id]
+    results = SqlRunner.run(sql, values)
+    return results.map{ |screening| Screening.new(screening) }
+  end
 end

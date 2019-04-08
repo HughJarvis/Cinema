@@ -48,12 +48,14 @@ class Screening
   end
 
   # def Screening.best_seller
+  # use ORDER BY to sort SQL stuff"
+
   #   sql = "SELECT screenings.id, screenings.seats_sold FROM screenings"
   #   results_array = SqlRunner.run(sql)
   #     #need a .each line that concatenates the hash keys to return strings that say
   #     #"Screening1 has sold X seats"
   #     #Screening2 has sold X seats" etc
-  #   
+  #
   #end
 
 end

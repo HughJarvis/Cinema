@@ -58,6 +58,7 @@ class Customer
   end
 
   def buy_ticket(screening)
+    #could ad if statement saying screening.seats_available > 0
     @funds -= screening.find_price
     screening.seats_available -= 1
     screening.seats_sold += 1
@@ -69,5 +70,7 @@ class Customer
     issued_ticket.save
     screening.update
     return issued_ticket
+    #else return "Sorry, this screening is sold out."
+    #end
   end
 end

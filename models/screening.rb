@@ -47,15 +47,11 @@ class Screening
     return SqlRunner.run(sql, values)[0]['price'].to_i
   end
 
-  # def Screening.best_seller
-  # use ORDER BY to sort SQL stuff"
+  def Screening.best_seller
+    # use ORDER BY to sort SQL stuff"
+    sql = "SELECT * FROM screenings ORDER BY seats_sold DESC"
+    return SqlRunner.run(sql)[0]
+  end
 
-  #   sql = "SELECT screenings.id, screenings.seats_sold FROM screenings"
-  #   results_array = SqlRunner.run(sql)
-  #     #need a .each line that concatenates the hash keys to return strings that say
-  #     #"Screening1 has sold X seats"
-  #     #Screening2 has sold X seats" etc
-  #
-  #end
 
 end
